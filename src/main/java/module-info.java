@@ -12,4 +12,6 @@ module lord.sistema.login.sistemadelogin {
 
     opens lord.sistema.login.sistemadelogin to javafx.fxml;
     exports lord.sistema.login.sistemadelogin;
+    exports lord.sistema.login.sistemadelogin.controlador;
+    opens lord.sistema.login.sistemadelogin.controlador to javafx.fxml;
 }
