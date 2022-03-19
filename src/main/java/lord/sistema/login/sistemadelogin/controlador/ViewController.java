@@ -31,24 +31,18 @@ public class ViewController {
 
         String login = txtLogin.getText();
         String senha = txtSenha.getText();
-        try {
 
+        try {
 
             if (Objects.equals(login, loginn) && Objects.equals(senha, senhaa)) {
                 Alertas.showAlerta("Acesso", "Logado com sucesso!", null, Alert.AlertType.INFORMATION);
-
-
             } else {
                 Alertas.showAlerta("Erro", "Login ou senha inválido", null, Alert.AlertType.ERROR);
-
             }
 
         } catch (NumberFormatException e) {
             Alertas.showAlerta("Erro", "Numero invalido", e.getMessage(), Alert.AlertType.ERROR);
         }
-        Stage stage = (Stage) Stage.getWindows();
-        stage.close();
-
     }
 }
 
