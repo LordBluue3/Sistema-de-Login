@@ -1,0 +1,54 @@
+.root{
+
+ -fx-background-image: url('https://cdn.discordapp.com/attachments/701489669673844887/954413360835870730/papel-de-parede-abstrato-geometrico-do-fundo-do-poligono-capa-do-cabecalho-com-forma-de-triangulo-azul-polly-baixo_206846-1173.png');
+ -fx-background-repeat: no-repeat;
+ -fx-background-size: 500 500;
+ -fx-background-position: center center;
+}
+
+#labelTitulo{
+-fx-text-fill: "white";
+-fx-font-weight: bold;
+ -fx-font-size: 20px;
+
+
+}
+
+#labelLogin{
+-fx-text-fill: "white";
+-fx-font-weight: bold;
+}
+
+#labelSenha{
+-fx-text-fill: "white";
+-fx-font-weight: bold;
+}
+
+#btnLogin{
+
+    -fx-text-fill: #003399;
+    -fx-font-weight: bold;
+    -fx-background-color: #FFFFFF;
+    -fx-border: none;
+    -fx-color: white;
+    -fx-padding: 10px 15px;
+    -fx-text-align: center;
+    -fx-text-decoration: none;
+    -fx-display: inline-block;
+    -fx-font-size: 12px;
+
+}
+
+.text-field {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.text-field:focused {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+
+
+
