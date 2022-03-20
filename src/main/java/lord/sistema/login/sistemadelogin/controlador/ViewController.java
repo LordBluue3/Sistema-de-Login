@@ -1,6 +1,7 @@
 package lord.sistema.login.sistemadelogin.controlador;
 
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -21,28 +22,38 @@ public class ViewController {
     @FXML
     private Button btnLogin;
 
+    @FXML
+    private int contagem = 1;
 
 
     @FXML
         public void onBtnLoginAction () {
 
-        String loginn = "Lord@gmail.com";
-        String senhaa = "1234";
+           //Login e senha
+            String loginn = "Lord@gmail.com";
+            String senhaa = "1234";
 
-        String login = txtLogin.getText();
-        String senha = txtSenha.getText();
+            // Pegando o login e senha que o usuario digitar no textField
+            String login = txtLogin.getText();
+            String senha = txtSenha.getText();
 
-        try {
+            //contador para se a pessoa errar a senha 3x fechar a aplicação
+            if(contagem == 3 ){
+                Stage stage = (Stage) btnLogin.getScene().getWindow();
+                stage.close();
+            }
 
+            try {
+                //se a senha e login forem iguais a da variaveis senhaa e loginn login valido!
             if (Objects.equals(login, loginn) && Objects.equals(senha, senhaa)) {
                 Alertas.showAlerta("Acesso", "Logado com sucesso!", null, Alert.AlertType.INFORMATION);
             } else {
                 Alertas.showAlerta("Erro", "Login ou senha inválido", null, Alert.AlertType.ERROR);
+                contagem++; //se ele errar a senha vai ter incrementada 1 numero a variavel contagem
             }
-
-        } catch (NumberFormatException e) {
-            Alertas.showAlerta("Erro", "Numero invalido", e.getMessage(), Alert.AlertType.ERROR);
-        }
+            } catch (NumberFormatException e) {
+                Alertas.showAlerta("Erro", "Numero invalido", e.getMessage(), Alert.AlertType.ERROR);
+            }
     }
 }
 
