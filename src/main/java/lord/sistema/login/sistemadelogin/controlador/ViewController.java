@@ -1,13 +1,13 @@
 package lord.sistema.login.sistemadelogin.controlador;
 
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lord.sistema.login.sistemadelogin.gui.utilitarios.Alertas;
 
+import java.io.FileWriter;
 import java.util.Objects;
 
 
@@ -24,7 +24,6 @@ public class ViewController {
 
     @FXML
     private int contagem = 1;
-
 
     @FXML
         public void onBtnLoginAction () {
