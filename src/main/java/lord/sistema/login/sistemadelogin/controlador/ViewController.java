@@ -6,8 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lord.sistema.login.sistemadelogin.gui.utilitarios.Alertas;
+import org.json.simple.JSONObject;
 
-import java.io.FileWriter;
 import java.util.Objects;
 
 
@@ -28,13 +28,19 @@ public class ViewController {
     @FXML
         public void onBtnLoginAction () {
 
-           //Login e senha
-            String loginn = "Lord@gmail.com";
-            String senhaa = "1234";
+        //Login e senha
+        String loginn = "Lord@gmail.com";
+        String senhaa = "1234";
 
             // Pegando o login e senha que o usuario digitar no textField
+            JSONObject json = new JSONObject();
+
             String login = txtLogin.getText();
             String senha = txtSenha.getText();
+
+            json.put("email",login);
+            json.put("senha",senha);
+            System.out.println(json);
 
             //contador para se a pessoa errar a senha 3x fechar a aplicação
             if(contagem == 3 ){
