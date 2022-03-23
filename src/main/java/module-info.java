@@ -8,6 +8,7 @@ module lord.sistema.login.sistemadelogin {
     requires validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
+    requires json.simple;
 
 
     opens lord.sistema.login.sistemadelogin to javafx.fxml;
