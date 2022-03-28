@@ -1,23 +1,24 @@
 package lord.sistema.login.sistemadelogin.controlador;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import lord.sistema.login.sistemadelogin.gui.utilitarios.Alertas;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 import org.json.simple.JSONObject;
 
-import javax.xml.transform.Source;
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 public class ViewController {
+    @FXML
+    private String porta = "12345";
+
+    @FXML
+    private String servidor = "127.0.0.1";
 
     @FXML
     private TextField txtLogin;
@@ -26,75 +27,47 @@ public class ViewController {
     private TextField txtSenha;
 
     @FXML
-    private Button btnLogin;
-
-    @FXML
-    private int contagem = 1;
-
-    @FXML
-    private String porta = "12345";
-
-    @FXML
-    private String servidor = "127.0.0.1";
-
-    @FXML
         public void onBtnLoginAction () {
+        conexao();
+    }
 
+    public void conexao(){
         JSONObject json = new JSONObject();
-        String login = txtLogin.getText();
-        String senha = txtSenha.getText();
 
         json.put("login", txtLogin.getText());
         json.put("senha", txtSenha.getText());
 
         try {
-            // need host and port, we want to connect to the ServerSocket at port 7777
+            // Tentado conexão ao servidor
             Socket socket = new Socket(servidor, Integer.parseInt(porta));
-            System.out.println("Connected!");
-
-            // get the output stream from the socket.
+            System.out.println("Conectado!");
+            // obter o fluxo de saída do soquete.
             OutputStream outputStream = socket.getOutputStream();
-            // create an object output stream from the output stream so we can send an object through it
+            // cria um fluxo de saída de objeto a partir do fluxo de saída para que possamos enviar um objeto através dele
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-
-            // make a bunch of messages to send.
+            //fazer um monte de mensagens para enviar.
             List<String> messages = new ArrayList<>();
-
+            //enviando mensagem em Json ao servidor
             messages.add(new String(json.toJSONString()));
-
-
-            System.out.println("Sending messages to the ServerSocket");
+            //Enviando mensagem ao socket
+            System.out.println("Enviando mensagem ao ServerSocket: ");
+            System.out.println(json);
+            System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=");
+            System.out.print("Resultado: ");
             objectOutputStream.writeObject(messages);
-
-            System.out.println("Closing socket and terminating program.");
+            //recebendo mensagem do socket
+            DataInputStream dus = new DataInputStream(socket.getInputStream());
+            String mgs = dus.readUTF();
+            System.out.println(mgs);
+            System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=");
+            //fechando o socket
+            System.out.println("Fechando o socket.");
             socket.close();
-
         } catch (IOException e) {
-         e.printStackTrace();
+            e.printStackTrace();
         }
-        //Login e senha
-        String loginn = "Lord@gmail.com";
-        String senhaa = "1234";
-
-
-            //contador para se a pessoa errar a senha 3x fechar a aplicação
-            if(contagem == 3 ){
-                Stage stage = (Stage) btnLogin.getScene().getWindow();
-                stage.close();
-            }
-
-            try {
-                //se a senha e login forem iguais a da variaveis senhaa e loginn login valido!
-            if (Objects.equals(login, loginn) && Objects.equals(senha, senhaa)) {
-                Alertas.showAlerta("Acesso", "Logado com sucesso!", null, Alert.AlertType.INFORMATION);
-            } else {
-                Alertas.showAlerta("Erro", "Login ou senha inválido", null, Alert.AlertType.ERROR);
-                contagem++; //se ele errar a senha vai ter incrementada 1 numero a variavel contagem
-            }
-            } catch (NumberFormatException e) {
-                Alertas.showAlerta("Erro", "Numero invalido", e.getMessage(), Alert.AlertType.ERROR);
-            }
     }
+
 }
 
 
