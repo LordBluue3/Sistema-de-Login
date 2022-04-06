@@ -1,7 +1,9 @@
 package lord.sistema.login.sistemadelogin.controlador;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 
 import java.io.DataInputStream;
@@ -14,6 +16,7 @@ import java.util.List;
 
 
 public class ViewController {
+
     @FXML
     private String porta = "12345";
 
@@ -25,6 +28,8 @@ public class ViewController {
 
     @FXML
     private TextField txtSenha;
+    @FXML
+    private Button btnLogin;
 
     @FXML
         public void onBtnLoginAction () {
@@ -41,6 +46,7 @@ public class ViewController {
             // Tentado conexão ao servidor
             Socket socket = new Socket(servidor, Integer.parseInt(porta));
             System.out.println("Conectado!");
+
             // obter o fluxo de saída do soquete.
             OutputStream outputStream = socket.getOutputStream();
             // cria um fluxo de saída de objeto a partir do fluxo de saída para que possamos enviar um objeto através dele
@@ -55,10 +61,17 @@ public class ViewController {
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.print("Resultado: ");
             objectOutputStream.writeObject(messages);
+
             //recebendo mensagem do socket
             DataInputStream dus = new DataInputStream(socket.getInputStream());
             String mgs = dus.readUTF();
+            String contador = dus.readUTF();
             System.out.println(mgs);
+            if(contador.equalsIgnoreCase("3")){
+                Stage stage = (Stage) btnLogin.getScene().getWindow();
+                stage.close();
+            }
+            System.out.println("numero da tentativa: "+contador);
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=");
             //fechando o socket
             System.out.println("Fechando o socket.");
