@@ -16,6 +16,6 @@ Após ser feita a requisição ao ServerSocket ele fará uma consulta e validaç
 ![Resposta](https://i.imgur.com/vJp3T4O.png)<br>
 
 # Sistema de tentativas falhas
-Após 3 tentativas falhas o socket envia mensagem para aplicação avisando que a mesma deve ser fechada para evitar Brute Force
+Após 3 tentativas falhas o socket envia mensagem para aplicação avisando que a mesma deve ser fechada para evitar um Brute Force
 
 ![Resposta](https://i.imgur.com/zpggfun.png)<br>
